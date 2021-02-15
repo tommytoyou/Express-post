@@ -18,14 +18,14 @@ app.use(express.urlencoded({extended: false }));
 app.use(methodOverride('_method'));
 // 5 - Routes (controllers)
 
-// fetch('https://espn.com')//url endpoint
-// .then((response) =>{
-//     console.log(response)
-//     return response.text();// an extra step that happens to see the text
-// })
-// .then((html) => {
-//     console.log(html)
-// })
+fetch('https://espn.com')//url endpoint
+.then((response) => {
+    console.log(response);
+    return response.text();// an extra step that happens to see the text
+})
+.then((html) => {
+    console.log(html);
+});
 // this is a request to a website that returns html
 
 // request to a third-party database that returns a JSON object
