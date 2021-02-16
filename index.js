@@ -1,8 +1,8 @@
 
 // 1 - Enviroment
 require('dotenv').config();
-console.log(process.env);
-console.log(process.env.API_KEY)
+// console.log(process.env);
+// console.log(process.env.API_KEY)
 // 2 - Imports
 const fetch = require('node-fetch');// only works in node
 const express = require('express');
@@ -19,6 +19,25 @@ app.use(ejsLayouts);
 app.use(express.urlencoded({extended: false }));
 app.use(methodOverride('_method'));
 // 5 - Routes (controllers)
+
+
+
+app.get('/', (req, res) => {
+    res.send('Happiness is seeing this message.')
+
+})
+
+app.get('/post/new', (req, res)=> {
+    // req.body
+    res.render('show', {})
+})
+
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT:${PORT}`)
+}) 
+
 
 // this is a request to a website that returns html
 
@@ -55,18 +74,3 @@ app.use(methodOverride('_method'));
 //     console.log(capsuleSerial);
 //     console.log(capsuleStatus);
 // })
-
-app.get('/', (req, res) => {
-    res.send('Happiness is seeing this message.')
-
-})
-
-app.get('/post/new', (req, res)=> {
-    // req.body
-    res.render('show', {})
-})
-// ..
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT:${PORT}`)
-}) 
