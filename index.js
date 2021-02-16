@@ -27,18 +27,57 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('/post/new', (req, res)=> {
-    // req.body
-    res.render('show', {})
+// app.get('/omdb', (req, res) => {
+//     const qs= {
+//         params: {
+//             s: 'star wars',
+//             apikey: process.env.API_KEY
+//         }
+//     }
+//     axios.get('https://www.omdbapi.com', qs)
+//     .then((response) => {
+//         console.log(response.data)
+        
+//     })
+// })
+
+// with the swapi api
+
+app.get('/swapi/search', (req, res) => {
+    res.render('search')
 })
 
+app.get('/swapi/show', (req, res) => {
+    console.log('Bulls-eye')
+    console.log('query', req.query)
+    // basic api call to get a person USING BACK TICS
+    axios.get(`https://swapi.dev/api/people/${req.query.personId}`)
+    .then((response)=> {
+        // response.data is where our data lives
+        console.log(response.data);
+        // make a person object
+        const person = {
+            name: response.data.name,
+            birth: response.data.birth_year,
+            gender: response.data.gender
+        }
+        res.render('show', person);
+    })
+})
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT:${PORT}`)
-}) 
+// app.get('/post/new', (req, res)=> {
+//     // req.body
+//     res.render('show', {})
+// })
 
 
+// const PORT = process.env.PORT || 8000;
+// app.listen(PORT, () => {
+//     console.log(`Server is running on PORT:${PORT}`)
+// }) 
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, console.log(`listening on ${PORT}`))
 // this is a request to a website that returns html
 
 // fetch('https://espn.com')//url endpoint
